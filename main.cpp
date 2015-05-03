@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GenLevel.h"
+#include "Character.h"
 
 using namespace std;
 
@@ -18,9 +19,14 @@ int main(int argc, char** argv) {
 	int minx, maxx, miny, maxy;
 	GenLevel(level, minx, maxx, miny, maxy);
 	
-	for (int i=(miny-1); i<=(maxy+1); i++) {
+	Character guy = Character(0, 1);
+	
+	for (int i=(maxy+1); i>=(miny-1); i--) {
 		for (int j=(minx-1); j<=(maxx+1); j++) {
-			if (PositionValid(level, j, i)) {
+			if (guy.PosX == j && guy.PosY == i) {
+				cout << (char)2;
+			}
+			else if (PositionValid(level, j, i)) {
 				cout << " ";
 			}
 			else {
