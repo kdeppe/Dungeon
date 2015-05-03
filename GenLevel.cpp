@@ -1,7 +1,9 @@
-#include "Position.cpp"
+#include "Position.h"
 #include <vector>
 
-void GenLevel(std::vector<Position> &level) {
+using namespace std;
+
+void GenLevel(vector<Position> &level) {
 	
 			 
 	level.push_back(Position(0, 0));

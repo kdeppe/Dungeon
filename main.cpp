@@ -1,11 +1,17 @@
 #include <iostream>
-#include "GenLevel.cpp"
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+#include "GenLevel.h"
+
+using namespace std;
 
 int main(int argc, char** argv) {
 	
-	std::vector<Position> level;
+	vector<Position> level;
 	GenLevel(level);
+	
+	for (int i=0; i<level.size(); i++) {
+		cout << level.at(i).x << "," << level.at(i).y << "\n";
+	}
+	
 	
 	return 0;
 }

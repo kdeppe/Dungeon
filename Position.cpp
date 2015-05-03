@@ -1,8 +1,5 @@
-class Position {
-	public:	
-		int x, y;
-		Position (int,int);
-};
+#include "Position.h"
+
 
 Position::Position (int xv, int yv) {
 	x = xv;
