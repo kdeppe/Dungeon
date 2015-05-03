@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1430680718 source:d:\code\dungeon\character.cpp
+	"Character.h"
+
+1430678246 d:\code\dungeon\character.h
+	"Position.h"
+	"Level.h"
+
+1430665738 d:\code\dungeon\position.h
+
+1430677856 d:\code\dungeon\level.h
+	<iostream>
+	<cstdlib>
+	<time.h>
+	<vector>
+	"Position.h"
+	"Enums.h"
+	"GenLevel.h"
+
+1430663361 d:\code\dungeon\enums.h
+
+1430669803 d:\code\dungeon\genlevel.h
+	"Position.h"
+	<vector>
+
+1430678720 source:d:\code\dungeon\draw.cpp
+	"Draw.h"
+
+1430673828 d:\code\dungeon\draw.h
+	<iostream>
+	"Level.h"
+	"Character.h"
+	"Enums.h"
+
+1430681877 source:d:\code\dungeon\gameloop.cpp
+	"GameLoop.h"
+
+1430681608 d:\code\dungeon\gameloop.h
+	<windows.h>
+	<time.h>
+	"Level.h"
+	"Character.h"
+	"Draw.h"
+
+1430674486 source:d:\code\dungeon\genlevel.cpp
+	"Position.h"
+	<vector>
+
+1430677754 source:d:\code\dungeon\level.cpp
+	"Level.h"
+
+1430666978 source:d:\code\dungeon\main.cpp
+	<iostream>
+	"GameLoop.h"
+
+1430665738 source:d:\code\dungeon\position.cpp
+	"Position.h"
+

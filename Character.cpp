@@ -45,19 +45,19 @@ void Character::MoveRandom(Level level) {
 	int r = rand() % 4;
 	switch ( r ) {
 		case 0:
-			cout << "^";
+			cout << "^\n";
 			MoveUp(level);
 			break;
 		case 1:
-			cout << "v";
+			cout << "v\n";
 			MoveDown(level);
 			break;
 		case 2:
-			cout << "<";
+			cout << "<\n";
 			MoveLeft(level);
 			break;
 		case 3:
-			cout << ">";
+			cout << ">\n";
 			MoveRight(level);
 			break;
 		default:

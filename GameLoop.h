@@ -1,7 +1,7 @@
 #ifndef __GAMELOOP_H__
 #define __GAMELOOP_H__
 
-#include <unistd.h>
+#include <windows.h>
 #include <time.h>
 #include "Level.h"
 #include "Character.h"
