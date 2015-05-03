@@ -6,4 +6,6 @@ Position::Position (int xv, int yv) {
 	y = yv;
 }
 
-
+bool Position::IsEqual(Position p) {
+	return (x == p.x && y == p.y);
+}
