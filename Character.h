@@ -9,6 +9,7 @@ class Character {
 		void MoveRight();
 		void MoveUp();
 		void MoveDown();
+		void MoveTo(int x, int y);
 };
 
 #endif

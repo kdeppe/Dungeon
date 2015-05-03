@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 #include "Level.h"
 #include "GenLevel.h"
 
@@ -20,6 +22,7 @@ Level::Level(Character &chr) {
 
 void Level::Gen() {
 	GenLevel(ValidTiles, MinX, MaxX, MinY, MaxY);
+	RandomPlaceCharacter();
 }
 
 void Level::Draw() {
@@ -39,8 +42,12 @@ void Level::Draw() {
 	}
 }
 
-void RandomPlaceCharacter() {
-	
+void Level::RandomPlaceCharacter() {
+	srand(time(NULL));
+	int index = rand() % ValidTiles.size();
+	int x = ValidTiles.at(index).x;
+	int y = ValidTiles.at(index).y;
+	character.MoveTo(x,y);
 }
 
 bool Level::PositionValid(int posx, int posy) {

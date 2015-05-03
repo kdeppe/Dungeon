@@ -20,3 +20,8 @@ void Character::MoveUp() {
 void Character::MoveDown() {
 	PosY--;
 }
+
+void Character::MoveTo(int x, int y) {
+	PosX = x;
+	PosY = y;
+}
