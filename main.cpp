@@ -1,18 +1,13 @@
 #include <iostream>
-#include "Level.h"
+#include "GameLoop.h"
 
 using namespace std;
 
-
-
 int main(int argc, char** argv) {
 	
-	Level level = Level();
-	level.Gen();
+	Initialize();
 	
-	
-	level.Draw();
-	
+	GameLoop();
 	
 	return 0;
 }

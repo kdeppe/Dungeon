@@ -4,6 +4,7 @@
 class Position {
 	public:	
 		int x, y;
+		Position ();
 		Position (int,int);
 		bool IsEqual(Position p);
 };

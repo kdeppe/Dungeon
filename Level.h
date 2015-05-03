@@ -1,23 +1,27 @@
 #ifndef __LEVEL_H__
 #define __LEVEL_H__
 
-#include "Position.h"
-#include "Character.h"
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
 #include <vector>
+#include "Position.h"
+#include "Enums.h"
+#include "GenLevel.h"
 
 using namespace std;
 
 class Level {
 	vector<Position> ValidTiles;
-	Character character = Character(0,0);
 	public:
-		int MinX, MaxX, MinY, MaxY;
+		unsigned int minX, maxX, minY, maxY;
 		Level();
-		Level(Character &chr);
 		void Gen();
-		void Draw();
-		bool PositionValid(int PosX, int PosY);
-		void RandomPlaceCharacter();
+		bool PositionValid(Position p);
+		bool PositionValid(int x, int y);
+		Position RandomValidTile();
+		void LevelToMatrix(vector< vector<TileState> > &levelMatrix);
+		
 };
 
 #endif

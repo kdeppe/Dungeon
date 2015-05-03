@@ -1,60 +1,46 @@
-#include <iostream>
-#include <cstdlib>
-#include <time.h>
 #include "Level.h"
-#include "GenLevel.h"
 
 Level::Level() {
-	character = Character(0,0);
-	MinX = 0;
-	MaxX = 0;
-	MinY = 0;
-	MaxY = 0;
-}
-
-Level::Level(Character &chr) {
-	character = chr;
-	MinX = 0;
-	MaxX = 0;
-	MinY = 0;
-	MaxY = 0;
+	minX = 0;
+	maxX = 0;
+	minY = 0;
+	maxY = 0;
 }
 
 void Level::Gen() {
-	GenLevel(ValidTiles, MinX, MaxX, MinY, MaxY);
-	RandomPlaceCharacter();
+	GenLevel(ValidTiles, minX, maxX, minY, maxY);
 }
 
-void Level::Draw() {
-	for (int i=(MaxY+1); i>=(MinY-1); i--) {
-		for (int j=(MinX-1); j<=(MaxX+1); j++) {
-			if (character.PosX == j && character.PosY == i) {
-				cout << (char)2;
-			}
-			else if (PositionValid(j, i)) {
-				cout << " ";
-			}
-			else {
-				cout << (char)219;
-			}
-		}
-		cout << "\n";
-	}
-}
-
-void Level::RandomPlaceCharacter() {
+Position Level::RandomValidTile() {
 	srand(time(NULL));
 	int index = rand() % ValidTiles.size();
-	int x = ValidTiles.at(index).x;
-	int y = ValidTiles.at(index).y;
-	character.MoveTo(x,y);
+	return ValidTiles.at(index);
 }
 
-bool Level::PositionValid(int posx, int posy) {
-	Position p = Position(posx, posy);
+bool Level::PositionValid(Position p) {
 	for (int i = 0; i < ValidTiles.size(); i++) {
 		if (ValidTiles.at(i).IsEqual(p))
 			return true;
 	}
 	return false;
+}
+
+bool Level::PositionValid(int x, int y) {
+	Position p = Position(x, y);
+	return PositionValid(p);
+}
+
+void Level::LevelToMatrix(vector< vector<TileState> > &levelMatrix) {
+	vector<TileState> row = vector<TileState>(maxY+1);
+	levelMatrix = vector< vector<TileState> >(maxX+1, row);
+	for (int i=minY; i<=maxY; i++) {
+		for (int j=minX; j<=maxX; j++) {
+			if (PositionValid(j, i)) {
+				levelMatrix[j][i] = TileState::FREE;
+			}
+			else {
+				levelMatrix[j][i] = TileState::WALL;
+			}
+		}
+	}
 }

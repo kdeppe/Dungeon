@@ -6,6 +6,6 @@
 
 using namespace std;
 
-void GenLevel(vector<Position> &level, int &minx, int &maxx, int &miny, int &maxy);
+void GenLevel(vector<Position> &level, unsigned int &minX, unsigned int &maxX, unsigned int &minY, unsigned int &maxY);
 
 #endif
