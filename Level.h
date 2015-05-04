@@ -14,14 +14,14 @@ using namespace std;
 class Level {
 	vector<Position> ValidTiles;
 	public:
-		unsigned int minX, maxX, minY, maxY;
+		int minX, maxX, minY, maxY;
 		Level();
 		void Gen();
 		bool PositionValid(Position p);
 		bool PositionValid(int x, int y);
 		Position RandomValidTile();
 		void LevelToMatrix(vector< vector<TileState> > &levelMatrix);
-		
+
 };
 
 #endif

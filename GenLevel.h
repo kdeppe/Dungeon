@@ -3,9 +3,13 @@
 
 #include "Position.h"
 #include <vector>
+#include <time.h>
+#include <cstdlib>
+#include <iostream>
+#include <windows.h>
 
 using namespace std;
 
-void GenLevel(vector<Position> &level, unsigned int &minX, unsigned int &maxX, unsigned int &minY, unsigned int &maxY);
-
+void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &maxY);
+bool TileExists(vector<Position> level, Position p);
 #endif
