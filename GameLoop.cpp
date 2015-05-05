@@ -11,7 +11,7 @@ void Initialize () {
 }
 
 void GameLoop() {
-	for (int i=0; i<10; i++) {
+	for (int i=0; i<100; i++) {
 		clock_t LoopStart, LoopDuration;
 		LoopStart = clock();
 
@@ -20,6 +20,6 @@ void GameLoop() {
 		Draw(level, character);
 
 		LoopDuration = clock() - LoopStart;
-		Sleep(1000 - (LoopDuration/(CLOCKS_PER_SEC/1000)));
+		Sleep(500 - (LoopDuration/(CLOCKS_PER_SEC/1000)));
 	}
 }

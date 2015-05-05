@@ -1,7 +1,7 @@
 #include "GenLevel.h"
 
-int maxDimensions = 10;
-int maxTiles = 50;
+int maxDimensions = 15;
+int maxTiles = 200;
 
 void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &maxY) {
 
@@ -38,16 +38,16 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
         Position pLeft = Position(p.x-1, p.y);
         Position pRight = Position(p.x+1, p.y);
 
-        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && not TileExists(level, pUp)) {
+        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && not TileExists(level, pUp) && not TileExists(adjacents, pUp)) {
             adjacents.push_back(pUp);
         }
-        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && not TileExists(level, pDown)) {
+        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && not TileExists(level, pDown) && not TileExists(adjacents, pDown)) {
             adjacents.push_back(pDown);
         }
-        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && not TileExists(level, pLeft)) {
+        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && not TileExists(level, pLeft) && not TileExists(adjacents, pLeft)) {
             adjacents.push_back(pLeft);
         }
-        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && not TileExists(level, pRight)) {
+        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && not TileExists(level, pRight) && not TileExists(adjacents, pRight)) {
             adjacents.push_back(pRight);
         }
 
