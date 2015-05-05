@@ -11,5 +11,5 @@
 using namespace std;
 
 void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &maxY);
-bool TileExists(vector<Position> level, Position p);
+int TileIndex(vector<Position> level, Position p);
 #endif

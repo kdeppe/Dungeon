@@ -5,7 +5,7 @@ int maxTiles = 200;
 
 void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &maxY) {
 
-	vector<Position> adjacents;
+	vector<Position> adjacents, exclude;
 
 	//Initialize level with single tile at (0, 0)
 	level.push_back(Position(0, 0));
@@ -38,32 +38,46 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
         Position pLeft = Position(p.x-1, p.y);
         Position pRight = Position(p.x+1, p.y);
 
-        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && not TileExists(level, pUp) && not TileExists(adjacents, pUp)) {
+        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && TileIndex(level, pUp) == (-1) && TileIndex(adjacents, pUp) == (-1) && TileIndex(exclude, pUp) == (-1)) {
             adjacents.push_back(pUp);
+        } else if (TileIndex(adjacents, pUp) != (-1)) {
+            exclude.push_back(pUp);
+            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pUp));
         }
-        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && not TileExists(level, pDown) && not TileExists(adjacents, pDown)) {
+        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && TileIndex(level, pDown) == (-1) && TileIndex(adjacents, pDown) == (-1) && TileIndex(exclude, pDown) == (-1)) {
             adjacents.push_back(pDown);
+        } else if (TileIndex(adjacents, pDown) != (-1)) {
+            exclude.push_back(pDown);
+            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pDown));
         }
-        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && not TileExists(level, pLeft) && not TileExists(adjacents, pLeft)) {
+        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && TileIndex(level, pLeft) == (-1) && TileIndex(adjacents, pLeft) == (-1) && TileIndex(exclude, pLeft) == (-1)) {
             adjacents.push_back(pLeft);
+        } else if (TileIndex(adjacents, pLeft) != (-1)) {
+            exclude.push_back(pLeft);
+            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pLeft));
         }
-        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && not TileExists(level, pRight) && not TileExists(adjacents, pRight)) {
+        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && TileIndex(level, pRight) == (-1) && TileIndex(adjacents, pRight) == (-1) && TileIndex(exclude, pRight) == (-1)) {
             adjacents.push_back(pRight);
+        } else if (TileIndex(adjacents, pRight) != (-1)) {
+            exclude.push_back(pRight);
+            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pRight));
         }
 
         // Diagnostic section
+        string out = "";
         for (int t=maxY; t>=minY; t--) {
             for (int u=minX; u<=maxX; u++) {
-                if (TileExists(level, Position(u, t))) {
-                    cout << " ";
-                } else if (TileExists(adjacents, Position(u, t))) {
-                    cout << (char)177;
+                if (TileIndex(level, Position(u, t)) != -1) {
+                    out += " ";
+                } else if (TileIndex(adjacents, Position(u, t)) != -1) {
+                    out += (char)177;
                 } else {
-                    cout << (char)219;
+                    out += (char)219;
                 }
             }
-            cout << "\n";
+            out += "\n";
         }
+        cout << out;
         Sleep(400);
     }
 
@@ -81,11 +95,11 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
 	minY = 0;
 }
 
-bool TileExists(vector<Position> level, Position p) {
+int TileIndex(vector<Position> level, Position p) {
     for (int i = 0; i< level.size(); i++) {
         if (level.at(i).IsEqual(p)) {
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
