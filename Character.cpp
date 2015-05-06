@@ -41,7 +41,6 @@ void Character::MoveTo(Position pos) {
 }
 
 void Character::MoveRandom(Level level) {
-	srand(time(NULL));
 	int r = rand() % 4;
 	switch ( r ) {
 		case 0:

@@ -4,6 +4,7 @@ Level level;
 Character character;
 
 void Initialize () {
+    srand(time(NULL));
 	level = Level();
 	character = Character();
 	level.Gen();
