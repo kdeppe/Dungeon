@@ -1,7 +1,7 @@
 #include "GenLevel.h"
 
 int maxDimensions = 15;
-int maxTiles = 200;
+int maxTiles = 20;
 
 void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &maxY) {
 
@@ -62,21 +62,24 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
             exclude.push_back(pUp);
             adjacents.erase(adjacents.begin()+ adjacentsUp);
         }
+
         if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && levelDown == (-1) && adjacentsDown == (-1) && excludeDown == (-1)) {
             adjacents.push_back(pDown);
         } else if (adjacentsDown != (-1)) {
             exclude.push_back(pDown);
             adjacents.erase(adjacents.begin()+ adjacentsDown);
         }
+
         if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && levelLeft == (-1) && adjacentsLeft == (-1) && excludeLeft == (-1)) {
             adjacents.push_back(pLeft);
         } else if (adjacentsLeft != (-1)) {
             exclude.push_back(pLeft);
             adjacents.erase(adjacents.begin()+ adjacentsLeft);
         }
+
         if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && levelRight == (-1) && adjacentsRight == (-1) && excludeRight == (-1)) {
             adjacents.push_back(pRight);
-        } else if (TileIndex(adjacents, pRight) != (-1)) {
+        } else if (adjacentsRight != (-1)) {
             exclude.push_back(pRight);
             adjacents.erase(adjacents.begin()+ adjacentsRight);
         }
@@ -89,6 +92,7 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
                     out += " ";
                 } else if (TileIndex(adjacents, Position(u, t)) != -1) {
                     out += (char)177;
+                } else if (TileIndex(exclude, Position()))
                 } else {
                     out += (char)219;
                 }

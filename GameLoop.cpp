@@ -12,7 +12,7 @@ void Initialize () {
 }
 
 void GameLoop() {
-	for (int i=0; i<100; i++) {
+	for (int i=0; i<10; i++) {
 		clock_t LoopStart, LoopDuration;
 		LoopStart = clock();
 
