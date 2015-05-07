@@ -23,6 +23,9 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
     Position p;
     srand(time(NULL));
     for (int j=0; j<maxTiles; j++) {
+        if (adjacents.size() == 0) {
+            break;
+        }
         index = rand() % adjacents.size();
         p = adjacents.at(index);
         level.push_back(p);
@@ -38,29 +41,44 @@ void GenLevel(vector<Position> &level, int &minX, int &maxX, int &minY, int &max
         Position pLeft = Position(p.x-1, p.y);
         Position pRight = Position(p.x+1, p.y);
 
-        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && TileIndex(level, pUp) == (-1) && TileIndex(adjacents, pUp) == (-1) && TileIndex(exclude, pUp) == (-1)) {
+        int levelUp = TileIndex(level, pUp);
+        int levelDown = TileIndex(level, pDown);
+        int levelLeft = TileIndex(level, pLeft);
+        int levelRight = TileIndex(level, pRight);
+
+        int adjacentsUp = TileIndex(adjacents, pUp);
+        int adjacentsDown = TileIndex(adjacents, pDown);
+        int adjacentsLeft = TileIndex(adjacents, pLeft);
+        int adjacentsRight = TileIndex(adjacents, pRight);
+
+        int excludeUp = TileIndex(exclude, pUp);
+        int excludeDown = TileIndex(exclude, pDown);
+        int excludeLeft = TileIndex(exclude, pLeft);
+        int excludeRight = TileIndex(exclude, pRight);
+
+        if (abs(pUp.x) <= maxDimensions && abs(pUp.y) <= maxDimensions && levelUp == (-1) && adjacentsUp == (-1) && excludeUp == (-1)) {
             adjacents.push_back(pUp);
-        } else if (TileIndex(adjacents, pUp) != (-1)) {
+        } else if (adjacentsUp != (-1)) {
             exclude.push_back(pUp);
-            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pUp));
+            adjacents.erase(adjacents.begin()+ adjacentsUp);
         }
-        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && TileIndex(level, pDown) == (-1) && TileIndex(adjacents, pDown) == (-1) && TileIndex(exclude, pDown) == (-1)) {
+        if (abs(pDown.x) <= maxDimensions && abs(pDown.y) <= maxDimensions && levelDown == (-1) && adjacentsDown == (-1) && excludeDown == (-1)) {
             adjacents.push_back(pDown);
-        } else if (TileIndex(adjacents, pDown) != (-1)) {
+        } else if (adjacentsDown != (-1)) {
             exclude.push_back(pDown);
-            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pDown));
+            adjacents.erase(adjacents.begin()+ adjacentsDown);
         }
-        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && TileIndex(level, pLeft) == (-1) && TileIndex(adjacents, pLeft) == (-1) && TileIndex(exclude, pLeft) == (-1)) {
+        if (abs(pLeft.x) <= maxDimensions && abs(pLeft.y) <= maxDimensions && levelLeft == (-1) && adjacentsLeft == (-1) && excludeLeft == (-1)) {
             adjacents.push_back(pLeft);
-        } else if (TileIndex(adjacents, pLeft) != (-1)) {
+        } else if (adjacentsLeft != (-1)) {
             exclude.push_back(pLeft);
-            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pLeft));
+            adjacents.erase(adjacents.begin()+ adjacentsLeft);
         }
-        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && TileIndex(level, pRight) == (-1) && TileIndex(adjacents, pRight) == (-1) && TileIndex(exclude, pRight) == (-1)) {
+        if (abs(pRight.x) <= maxDimensions && abs(pRight.y) <= maxDimensions && levelRight == (-1) && adjacentsRight == (-1) && excludeRight == (-1)) {
             adjacents.push_back(pRight);
         } else if (TileIndex(adjacents, pRight) != (-1)) {
             exclude.push_back(pRight);
-            adjacents.erase(adjacents.begin()+ TileIndex(adjacents, pRight));
+            adjacents.erase(adjacents.begin()+ adjacentsRight);
         }
 
         // Diagnostic section
