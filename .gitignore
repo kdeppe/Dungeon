@@ -1,5 +1,6 @@
 Makefile.win
 *.layout
+*.depend
 
 # Compiled Object files
 *.slo
